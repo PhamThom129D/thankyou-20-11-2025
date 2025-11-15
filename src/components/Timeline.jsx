@@ -1,33 +1,95 @@
 'use client'
 import { motion } from 'framer-motion'
+import { useRef } from 'react'
 
 const timelineData = [
-  { year: '2020', text: 'Bắt đầu học lập trình: Từ "Hello World" đến những giấc mơ lớn! 🌱', icon: '🚀' },
-  { year: '2021', text: 'Trải qua bug đầu tiên: Học cách debug như một ninja! 🥷', icon: '🐛' },
-  { year: '2022', text: 'Mentor xuất hiện: Fix bug, dạy code, và truyền cảm hứng! 👨‍🏫', icon: '💡' },
-  { year: '2023', text: 'Project đầu tiên: Từ ý tưởng đến sản phẩm hoàn chỉnh! 🎯', icon: '🏗️' },
-  { year: '2024', text: 'Thành tựu lớn: Cảm ơn mentor – hành trình này mãi không quên! 🏆', icon: '🎉' },
+  { year: '09-2023', text: 'Bắt đầu khóa học Web Developer: Làm quen HTML, CSS, JavaScript cơ bản 🌱', icon: '🚀' },
+  { year: '11-2023', text: 'Học OOP và MySQL cơ bản: Lập trình hướng đối tượng và quản lý dữ liệu 🛠️', icon: '💡' },
+  { year: '02-2024', text: 'JavaFX + Servlet + JSP: Xây dựng ứng dụng desktop & web cơ bản 🖥️', icon: '🖌️' },
+  { year: '05-2024', text: 'Java Spring: Xây dựng backend dự án E-commerce "Sàn thương mại Trưa nay ăn gì" ⚡', icon: '🏗️' },
+  { year: '10-2024', text: 'Spring Boot + Security + JWT + React: Tích hợp Frontend & Backend cho dự án thương mại điện tử 🎯', icon: '🚀' },
+  { year: '07-2025', text: 'Nâng cao React: React Router, Form, Context, Redux 🌀', icon: '⚡' },
+  { year: '08-2025', text: 'Triển khai dự án: Backend Spring Boot + Frontend React + API + JWT bảo mật 🔐', icon: '🎉' },
+  { year: '11-2024', text: 'Project thực tế: Hệ thống hỗ trợ phòng khám da liễu 💻 (đang phát triển)', icon: '🏥' },
 ]
 
 export default function Timeline() {
+  const audioRef = useRef(null)
+
+  const playSound = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0
+      audioRef.current.play()
+    }
+  }
+
+  const stopSound = () => {
+    if (audioRef.current) audioRef.current.pause()
+  }
+
+  const rainLines = [
+    'console.log("Hello");',
+    'if (true) {',
+    'const x = 42;',
+    'function foo() {}',
+    'let y = x * 2;',
+    '{}', '[]', '()', '// comment'
+  ]
+
   return (
-    <div id="timeline" className="max-w-4xl mx-auto py-16 px-4 bg-gradient-to-br from-cyan-100 via-teal-100 to-blue-100 relative overflow-hidden">
-      {/* Background code snippets */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <div className="text-4xl text-cyan-600 font-mono absolute top-10 left-10">const journey = [</div>
-        <div className="text-3xl text-teal-600 font-mono absolute bottom-20 right-20">'2024', 'Success' ];</div>
-        <div className="text-5xl text-blue-600 font-mono absolute top-1/2 left-1/4">// Timeline</div>
+    <div id="timeline" className="w-full mx-auto py-16 px-32 bg-gradient-to-br from-cyan-180 via-teal-180 to-blue-160 relative overflow-hidden">
+      <audio ref={audioRef} src="/sounds/hover.mp3" preload="auto" />
+
+      {/* ==== CODE RAIN LAYER ==== */}
+      <div className="absolute inset-0 pointer-events-none">
+        {Array.from({ length: 35 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-teal-400/50 font-mono text-sm"
+            initial={{ y: -50, x: Math.random() * window.innerWidth }}
+            animate={{ y: [ -50, window.innerHeight + 50 ] }}
+            transition={{ duration: 6 + Math.random() * 4, repeat: Infinity, ease: 'linear', delay: i * 0.5 }}
+          >
+            {rainLines[i % rainLines.length]}
+          </motion.div>
+        ))}
       </div>
-      
-      {/* Parallax effect */}
+
+      {/* Background code snippets với parallax nhẹ */}
+      <motion.div
+        className="absolute inset-0 opacity-10 pointer-events-none"
+        initial={{ y: 0 }}
+        whileInView={{ y: -20 }}
+        transition={{ duration: 2 }}
+      >
+        <div className="text-4xl text-cyan-600 font-mono absolute top-10 left-10">const journey = </div>
+
+      </motion.div>
+
+      {/* Parallax effect với glow */}
       <motion.div
         className="absolute inset-0 bg-fixed opacity-5"
-        style={{ backgroundImage: 'radial-gradient(circle, #06b6d4 1px, transparent 1px)', backgroundSize: '20px 20px' }}
+        style={{ backgroundImage: 'radial-gradient(circle, #213d42ff 1px, transparent 1px)', backgroundSize: '20px 20px' }}
         initial={{ y: 0 }}
         whileInView={{ y: -30 }}
         transition={{ duration: 3 }}
       />
-      
+
+      {/* Floating particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {Array.from({ length: 15 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-cyan-400 text-sm opacity-20"
+            initial={{ x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight }}
+            animate={{ y: [0, -100, 0], x: [0, 20, 0] }}
+            transition={{ duration: 8 + i, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            {['{}', '()', '[]'][i % 3]}
+          </motion.div>
+        ))}
+      </div>
+
       <motion.h2
         initial={{ opacity: 0, scale: 0.8, rotate: 10 }}
         whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -35,13 +97,12 @@ export default function Timeline() {
         transition={{ duration: 1, type: 'spring' }}
         className="text-3xl font-bold text-center mb-12 text-cyan-700 font-mono relative z-10"
       >
-        Hành Trình Code Journey 🗺️
+        Nhìn Lại Hành Trình Code 🖥️
       </motion.h2>
-      
+
       <div className="space-y-12 relative">
-        {/* Timeline line */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-cyan-400 to-teal-400 h-full rounded-full"></div>
-        
+        <div className="absolute left-1/2 transform -translate-x-1/2 w-2 bg-gradient-to-b from-cyan-400 to-teal-400 h-full rounded-full shadow-lg shadow-cyan-400/50"></div>
+
         {timelineData.map((item, i) => (
           <motion.div
             key={i}
@@ -49,20 +110,19 @@ export default function Timeline() {
             whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: i * 0.4, type: 'spring', stiffness: 100 }}
-            whileHover={{ scale: 1.05, boxShadow: '0 15px 30px rgba(6, 182, 212, 0.3)' }}
+            whileHover={{ 
+              scale: 1.05, 
+              rotate: i % 2 === 0 ? 2 : -2, 
+              boxShadow: '0 20px 40px rgba(6, 182, 212, 0.4)' 
+            }}
+            onHoverStart={playSound}
+            onHoverEnd={stopSound}
             className={`p-6 bg-white/80 backdrop-blur-lg rounded-3xl shadow-lg flex items-center space-x-6 relative z-10 border border-teal-200 ${i % 2 === 0 ? 'ml-auto mr-8' : 'mr-auto ml-8'} max-w-lg`}
           >
-            {/* Connector dot */}
-            <motion.div
-              className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-cyan-500 rounded-full border-4 border-white shadow-lg"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            
             <motion.div
               className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 text-white flex items-center justify-center text-2xl font-bold"
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
+              whileHover={{ rotate: 360, scale: 1.2 }}
+              transition={{ duration: 0.5, type: 'spring' }}
             >
               {item.icon}
             </motion.div>

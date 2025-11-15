@@ -33,19 +33,13 @@
 
 4. **Gallery / Kỷ niệm**
 
-   - Ảnh project, notes, hoặc lớp học.
+   - Ảnh project, notes, lớp học, team-building, sinh nhật.
    - Hover animation nhẹ để phóng to.
 
 5. **Footer + Scroll To Top**
 
    - Nút di chuyển lên đầu trang.
    - Thông tin bản quyền.
-
-6. **(Tùy chọn) Mini Game**
-   - Game đơn giản phong cách Flappy Bird/Dino.
-   - Điểm cao → hiện lời cảm ơn “xịn hơn”.
-
----
 
 ## Công nghệ sử dụng
 
@@ -63,42 +57,43 @@ src/
 ├─ app/
 │ └─ page.tsx # Trang chính gọi các component
 ├─ components/
-│ ├─ Hero.jsx
-│ ├─ Timeline.jsx
-│ ├─ ThankYouGift.jsx
-│ ├─ Gallery.jsx
-│ └─ Footer.jsx
+│ └─ BackToTop.tsx
+│ └─ CodeRain.tsx
+│ └─ Footer.tsx
+│ ├─ HeroSection.tsx
+│ ├─ Timeline.tsx
+│ ├─ ThankYou.tsx
+│ ├─ Gallery.tsx
 └─ styles/
 └─ globals.css
 public/
-└─ codegym-logo.jpeg
-
-yaml
-Sao chép mã
-
----
+├─ codegym-logo.jpeg
+├─ image1.jpg
+├─ image2.jpg
+├─ image3.jpg
+├─ image4.jpg
+├─ image5.jpg
+├─ image6.jpg
+├─ image7.jpg
+├─ image8.jpg
+├─ image9.jpg
+└─ image10.jpg
 
 ## Hướng dẫn cài đặt & chạy
 
 1. **Clone dự án:**
 
 ```bash
-git clone https://github.com/<username>/code-journey-thank-you.git
-cd code-journey-thank-you
+git clone https://github.com/<username>/thankyou-20-11-2025
+cd next-thankyou
+
 Cài dependencies:
-
-bash
-Sao chép mã
 npm install
-Nếu bạn muốn Tailwind hoạt động:
 
-bash
-Sao chép mã
+Cấu hình TailwindCSS (nếu chưa có):
 npx tailwindcss init -p
-Và cấu hình tailwind.config.js:
 
-js
-Sao chép mã
+Và chỉnh tailwind.config.js:
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -110,22 +105,12 @@ module.exports = {
   },
   plugins: [],
 }
+
 Chạy ứng dụng:
-
-bash
-Sao chép mã
 npm run dev
+
 Mở trình duyệt:
-
-arduino
-Sao chép mã
 http://localhost:3000
-Bạn sẽ thấy landing page với Hero, scroll xuống sẽ thấy Timeline, Thank You Gift, Gallery.
 
-Cách sử dụng
-Scroll xuống các section hoặc click navbar để di chuyển đến Timeline / Thank You / Gallery.
-
-Click vào hộp quà trong phần Thank You để mở ra các lời nhắn cảm ơn.
-
-Hover các ảnh trong Gallery để phóng to nhẹ.
+Bạn sẽ thấy landing page với Hero Section, scroll xuống sẽ thấy Timeline, Thank You Gift, và Gallery.
 ```
