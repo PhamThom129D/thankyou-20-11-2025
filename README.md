@@ -27,7 +27,6 @@
 
 3. **Lời Cảm Ơn (Thank You)**
 
-   - Hộp quà tương tác, click mở ra hiển thị lời nhắn.
    - Animation pop-up, scale, fade-in.
    - Nền gradient + sparkles nhẹ.
 
